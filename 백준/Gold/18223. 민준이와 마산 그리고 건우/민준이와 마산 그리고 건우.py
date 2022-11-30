@@ -1,28 +1,27 @@
+# 18223
 import heapq
-from copy import deepcopy
 
 def dijkstra(i):
     heap = []
-    heapq.heappush(heap, (0, i, [i]))
-
+    heapq.heappush(heap, (0, i))
+    dist = [inf] * (V+1) 
     while heap:
-        w, n, route = heapq.heappop(heap)
+        w, n = heapq.heappop(heap)
 
         if dist[n] < w:
             continue
 
-        if n == V and P in route:
-            return True
+        dist[n] = w
+
+        if n == P and i == V:
+            break
 
         for new_n, new_w in arr[n]:
-            if dist[new_n] >= new_w + w:
-                new_route = deepcopy(route)
-                new_route.append(new_n)
+            if dist[new_n] > new_w + w:
                 dist[new_n] = new_w + w
-                heapq.heappush(heap, (new_w + w, new_n, new_route))
-
-    return False
-
+                heapq.heappush(heap, (new_w + w, new_n))
+    return dist
+    
 V, E, P = map(int, input().split())
 
 arr = [[] for _ in range(V+1)]
@@ -32,10 +31,11 @@ for _ in range(E):
     arr[b].append((a, c))
 
 inf = float("inf")
-dist = [inf] * (V+1)
 
-string = dijkstra(1)
-if string:
+dist1 = dijkstra(1)
+distV = dijkstra(V)
+
+if dist1[P] + distV[P] == dist1[V]:
     print("SAVE HIM")
 else:
     print("GOOD BYE")
