@@ -19,7 +19,7 @@ def dijkstra(i):
     return dist
 
 T = int(input())
-for aaaaa in range(T):
+for aaaaaa in range(T):
     N, M = map(int, input().split())
     arr = [[] for _ in range(N+1)]
     for _ in range(M):
