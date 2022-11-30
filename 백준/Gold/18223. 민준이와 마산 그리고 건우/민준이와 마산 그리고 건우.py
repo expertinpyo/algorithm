@@ -1,10 +1,11 @@
-# 18223
 import heapq
+import sys
+input = sys.stdin.readline
 
 def dijkstra(i):
     heap = []
     heapq.heappush(heap, (0, i))
-    dist = [inf] * (V+1) 
+    dist = [inf] * (V+1)
     while heap:
         w, n = heapq.heappop(heap)
 
@@ -21,7 +22,7 @@ def dijkstra(i):
                 dist[new_n] = new_w + w
                 heapq.heappush(heap, (new_w + w, new_n))
     return dist
-    
+
 V, E, P = map(int, input().split())
 
 arr = [[] for _ in range(V+1)]
