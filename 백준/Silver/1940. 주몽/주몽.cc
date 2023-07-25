@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -12,40 +13,34 @@ int main()
 
 	int n, m;
 
-	cin >> n;
-	cin >> m;
+	cin >> n >> m;
 
-	vector<int> arr;
+	vector<int> arr(n, 0);
 
 	for (int i = 0; i < n; i++)
 	{ 
-		int input;
-		cin >> input;
-		arr.emplace_back(input);
+		cin >> arr[i];
 	}
 
-	auto iter1 = arr.begin();
-	auto iter2 = iter1 + 1;
-	
+	sort(arr.begin(), arr.end());
+
+	int left = 0;
+	int right = n - 1;
+
 	int ans = 0;
 
-	while (iter1 != arr.end())
+	while (left < right)
 	{
-		if (iter2 == arr.end())
-		{
-			iter1++;
-			iter2 = iter1 + 1;
-			continue;
-		}
-		
-
-		if (*iter1 + *iter2 == m)
+		if (arr[left] + arr[right] < m)
+			left++;
+		else if (arr[left] + arr[right] > m)
+			right--;
+		else
 		{
 			ans++;
-			iter2++;
-			continue;
+			left++;
+			right--;
 		}
-		iter2++;
 	}
 
 	cout << ans;
