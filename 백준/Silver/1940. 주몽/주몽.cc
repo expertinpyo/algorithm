@@ -6,6 +6,10 @@ using namespace std;
 
 int main()
 {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
 	int n, m;
 
 	cin >> n;
@@ -41,8 +45,6 @@ int main()
 			iter2++;
 			continue;
 		}
-		
-		
 		iter2++;
 	}
 
